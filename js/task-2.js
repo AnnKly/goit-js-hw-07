@@ -33,8 +33,14 @@ function createImgEl(image) {
   imgEl.src = image.url;
   imgEl.alt = image.alt;
   imgEl.width = 320;
-  return imgEl;
+  liEL.appendChild(imgEl);
+  return liEL;
 }
 
-const imgElements = images.map(createImgEl);
-imgElements.forEach(img => gallery.appendChild(img));
+const fragment = document.createDocumentFragment();
+images.forEach(image => {
+  const imgElement = createImgEl(image);
+  fragment.appendChild(imgElement);
+});
+
+gallery.appendChild(fragment);
